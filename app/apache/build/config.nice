@@ -1,0 +1,9 @@
+#! /bin/sh
+#
+# Created by configure
+
+"./configure" \
+"--prefix=/app/apache" \
+"--enable-rewrite" \
+"--enable-libxml" \
+"$@"
