@@ -15,9 +15,12 @@ The config files are bundled with the LP itself:
 Pre-compiling binaries
 ----------------------
 
+Fix mountain lion: sudo ln -s /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain /Applications/Xcode.app/Contents/Developer/Toolchains/OSX10.8.xctoolchain
+Install PCRE: brew install pcre
+
     # apache
-    mkdir /app
-    wget http://apache.cyberuse.com//httpd/httpd-2.2.19.tar.gz
+    mkdir /app //temprarily sudo it to 777
+    curl http://apache.cyberuse.com/httpd/httpd-2.4.2.tar.gz -O
     tar xvzf httpd-2.2.19.tar.gz
     cd httpd-2.2.19
     ./configure --prefix=/app/apache --enable-rewrite --enable-libxml
@@ -26,11 +29,12 @@ Pre-compiling binaries
     cd ..
     
     # php
-    wget http://us2.php.net/get/php-5.3.6.tar.gz/from/us.php.net/mirror 
+    // Go go : http://www.php.net/get/php-5.3.6.tar.gz/from/a/mirror
+    curl http://us2.php.net/get/php-5.3.6.tar.gz/from/us.php.net/mirror -O
     mv mirror php.tar.gz
     tar xzvf php.tar.gz
     cd php-5.3.6/
-    ./configure --prefix=/app/php  --enable-xslt --with-xsl --with-dom=/app/php --with-dom-xslt=/app/php  --with-iconv --with-gd --with-curl=/usr/lib --enable-libxml 
+    ./configure --prefix=/app/php  --enable-xslt --with-xsl --with-dom=/app/php --with-dom-xslt=/app/php  --with-iconv --with-curl=/usr/lib --enable-libxml 
     make
     make install
     make
@@ -38,23 +42,23 @@ Pre-compiling binaries
     cd ..
     
     # php extensions
-    mkdir /app/php/ext
-    cp /usr/lib/libmysqlclient.so.15 /app/php/ext/
+    # mkdir /app/php/ext
+    # cp /usr/lib/libmysqlclient.so.15 /app/php/ext/
     
     # pear
-    apt-get install php5-dev php-pear
-    pear config-set php_dir /app/php
-    pecl install apc
-    mkdir /app/php/include/php/ext/apc
-    cp /usr/lib/php5/20060613/apc.so /app/php/ext/
-    cp /usr/include/php5/ext/apc/apc_serializer.h /app/php/include/php/ext/apc/
+    # apt-get install php5-dev php-pear
+    # pear config-set php_dir /app/php
+    # pecl install apc
+    # mkdir /app/php/include/php/ext/apc
+    # cp /usr/lib/php5/20060613/apc.so /app/php/ext/
+    # cp /usr/include/php5/ext/apc/apc_serializer.h /app/php/include/php/ext/apc/
     
     
     # package
     cd /app
-    echo '2.2.19' > apache/VERSION
+    # echo '2.2.19' > apache/VERSION
     tar -zcvf apache.tar.gz apache
-    echo '5.3.6' > php/VERSION
+    # echo '5.3.6' > php/VERSION
     tar -zcvf php.tar.gz php
 
 
